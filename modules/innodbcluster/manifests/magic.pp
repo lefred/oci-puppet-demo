@@ -51,7 +51,7 @@ class innodbcluster::magic {
         notice("This node will bootstrap of the cluster")
         exec {
           "create_cluster":
-            command => "/bin/sleep 5 && mysqlsh ${user}@${this_host} -- dba createCluster \"${clustername}\"",
+            command => "/bin/sleep 5 && mysqlsh ${user}@${this_host} -- dba createCluster \"${clustername}\" --label=${this_host}",
             path    => ['/usr/bin', '/bin'],
             environment => ['MYSQL_TEST_LOGIN_FILE=/root/.mylogin.cnf'],
             require => Exec["create_admin_user"],
@@ -72,7 +72,7 @@ class innodbcluster::magic {
         }
         exec {
           "add_instance_cluster":
-            command => "mysqlsh ${user}@${cluster_node} --no-wizard -- cluster add-instance ${user}@${this_host} --recoveryMethod=clone",
+            command => "mysqlsh ${user}@${cluster_node} --no-wizard -- cluster add-instance ${user}@${this_host} --label=${this_host} --recoveryMethod=clone",
             path    => ['/usr/bin', '/bin'],
             environment => ['MYSQL_TEST_LOGIN_FILE=/root/.mylogin.cnf'],
             require => Exec["create_admin_user"],
