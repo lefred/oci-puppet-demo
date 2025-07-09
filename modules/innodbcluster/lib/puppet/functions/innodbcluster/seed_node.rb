@@ -10,9 +10,11 @@ Puppet::Functions.create_function(:'innodbcluster::seed_node') do
 
   def find_seed(members, user = 'root')
     env = { 'MYSQL_TEST_LOGIN_FILE' => '/root/.mylogin.cnf' }
+    Puppet.debug("DEBUG: got those members #{members}")
 
     members.each do |host|
       cmd = ["mysqlsh", "#{user}@#{host}", "--", "cluster", "status"]
+      Puppet.debug("Trying to contact #{host} using mysqlsh")
       Puppet.warning("Trying to contact #{host} using mysqlsh")
       stdout, stderr, status = Open3.capture3(env, *cmd)
 
