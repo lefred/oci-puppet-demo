@@ -11,6 +11,7 @@ class innodbcluster::magic {
   $members = lookup('innodbcluster::members', Optional[Array[String]], 'first', undef)
   $cluster_node = innodbcluster::seed_node($members, $user)
   notify{"DEBUG: Cluster members are ${members}":}
+  notify{"DEBUG: Cluster node is ${cluster_node}":}
   $this_host = $facts['networking']['fqdn']
 
   if defined(Class['innodbcluster::clusterset']) {
