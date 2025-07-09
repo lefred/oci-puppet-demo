@@ -13,6 +13,7 @@ Puppet::Functions.create_function(:'innodbcluster::seed_clusterset_node') do
 
     members.each do |host|
       cmd = ["mysqlsh", "#{user}@#{host}", "--", "clusterset", "status"]
+      Puppet.debug("Trying to contact #{host} using mysqlsh")
       stdout, stderr, status = Open3.capture3(env, *cmd)
 
       if status.success?
