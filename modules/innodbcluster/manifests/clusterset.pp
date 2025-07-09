@@ -50,6 +50,7 @@ class innodbcluster::clusterset {
             environment => ['MYSQL_TEST_LOGIN_FILE=/root/.mylogin.cnf'],
             require => Exec["create_admin_user"],
             refreshonly => true,
+            notify => Exec["change_instance_label"],
   }
 
 }

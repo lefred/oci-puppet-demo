@@ -39,6 +39,11 @@ class innodbcluster::magic {
          path    => ['/usr/bin', '/bin'],
          environment => ['MYSQL_TEST_LOGIN_FILE=/root/.mylogin.cnf'],
          unless  => "mysql --login-path=root@localhost -BN -e 'select user from mysql.user where user = \"${user}\" and host = \"%\"' | grep $user > /dev/null",
+  "change_instance_label":
+            command => "mysqlsh ${user}@${this_host} --no-wizard -- cluster set-instance-option ${host_with_port} label ${this_host}",
+            path    => ['/usr/bin', '/bin'],
+            environment => ['MYSQL_TEST_LOGIN_FILE=/root/.mylogin.cnf'],
+            refreshonly => true,
   }
 
 
@@ -55,6 +60,7 @@ class innodbcluster::magic {
             path    => ['/usr/bin', '/bin'],
             environment => ['MYSQL_TEST_LOGIN_FILE=/root/.mylogin.cnf'],
             require => Exec["create_admin_user"],
+            notify => Exec["change_instance_label"],
         }
       } else {
         $clusterset_members = lookup('innodbcluster::clusterset::members', Optional[Array[String]], 'first', undef)
@@ -70,12 +76,15 @@ class innodbcluster::magic {
         unless innodbcluster::cluster_node($this_host, $user) {
           notice("This node will join the cluster using ${cluster_node} as seed node")
         }
+        $short_host = split($this_host, '.')[0]
+        $host_with_port = "${short_host}:3306"
         exec {
           "add_instance_cluster":
             command => "mysqlsh ${user}@${cluster_node} --no-wizard -- cluster add-instance ${user}@${this_host} --recoveryMethod=clone",
             path    => ['/usr/bin', '/bin'],
             environment => ['MYSQL_TEST_LOGIN_FILE=/root/.mylogin.cnf'],
             require => Exec["create_admin_user"],
+            notify => Exec["change_instance_label"],
             unless  => "mysqlsh ${user}@${this_host} --no-wizard -- cluster describe | grep '${this_host}:'",
         }
       }
