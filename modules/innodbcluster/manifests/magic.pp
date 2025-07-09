@@ -42,11 +42,14 @@ class innodbcluster::magic {
          path    => ['/usr/bin', '/bin'],
          environment => ['MYSQL_TEST_LOGIN_FILE=/root/.mylogin.cnf'],
          unless  => "mysql --login-path=root@localhost -BN -e 'select user from mysql.user where user = \"${user}\" and host = \"%\"' | grep $user > /dev/null";
-  "change_instance_label":
+  }
+
+  exec {
+    "change_instance_label":
             command => "mysqlsh ${user}@${this_host} --no-wizard -- cluster set-instance-option ${host_with_port} label ${this_host}",
             path    => ['/usr/bin', '/bin'],
             environment => ['MYSQL_TEST_LOGIN_FILE=/root/.mylogin.cnf'],
-            refreshonly => true,
+            refreshonly => true;
   }
 
 
