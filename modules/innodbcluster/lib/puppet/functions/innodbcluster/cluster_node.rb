@@ -2,7 +2,6 @@
 
 Puppet::Functions.create_function(:'innodbcluster::cluster_node') do
   require 'open3'
-  require 'socket'
 
   dispatch :find_node do
     param 'String', :member
