@@ -12,7 +12,7 @@ class innodbcluster::clusterset {
   $clusterset_name = lookup('innodbcluster::clusterset::name', Optional[String], 'first', undef)
   $clusterset_primary_name = lookup('innodbcluster::clusterset::primary_name', Optional[String], 'first', undef)
 
-  $this_host = $facts['networking']['hostname']
+  $this_host = $facts['networking']['fqdn']
   $another_host = innodbcluster::seed_clusterset_node($clusterset_members, $user)
 
   if $this_host in $clusterset_members {

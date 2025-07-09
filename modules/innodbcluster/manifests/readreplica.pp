@@ -10,7 +10,7 @@ class innodbcluster::readreplica {
 
   $members = lookup('innodbcluster::members', Optional[Array[String]], 'first', undef)
 
-  $this_host = $facts['networking']['hostname']
+  $this_host = $facts['networking']['fqdn']
 
   # check if this node is already part of the cluster as read replica
   if !innodbcluster::readreplica_is_part($this_host, $clustername, $user) {

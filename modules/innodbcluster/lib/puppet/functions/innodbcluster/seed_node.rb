@@ -3,6 +3,7 @@
 Puppet::Functions.create_function(:'innodbcluster::seed_node') do
   require 'open3'
   require 'socket'
+  require 'resolv'
 
   dispatch :find_seed do
     param 'Array[String]', :members
@@ -21,7 +22,7 @@ Puppet::Functions.create_function(:'innodbcluster::seed_node') do
       end
     end
 
-    Socket.gethostname
+    Resolv.getname(Socket.gethostname)
   rescue => e
     Puppet.warning("innodbcluster::seed_node failed: #{e}")
     nil
