@@ -15,6 +15,9 @@ Puppet::Functions.create_function(:'innodbcluster::seed_node') do
       cmd = ["mysqlsh", "#{user}@#{host}", "--", "cluster", "status"]
       Puppet.warning("Trying to contact #{host} using mysqlsh")
       stdout, stderr, status = Open3.capture3(env, *cmd)
+      Puppet.warning("TURISHIP1: #{stdout}")
+      Puppet.warning("TURISHIP2: #{stderr}")
+      Puppet.warning("TURISHIP3: #{cmd}")
 
       if status.success?
         Puppet.warning("Success we found a cluster on #{host}")
