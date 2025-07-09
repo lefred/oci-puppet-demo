@@ -1,0 +1,16 @@
+---
+innodbcluster::mysql_series: innovation
+
+innodbcluster::mysql_root_password: fred
+innodbcluster::adminuser: clusteradmin
+innodbcluster::adminpassword: Passw0rd!
+
+innodbcluster::clusterset::name: myclusterset
+innodbcluster::clusterset::primary_name: mycluster
+innodbcluster::clusterset::members:
+  - mysql1
+  - mysql2
+  - mysql3
+  - mysql4
+  - mysql5
+
