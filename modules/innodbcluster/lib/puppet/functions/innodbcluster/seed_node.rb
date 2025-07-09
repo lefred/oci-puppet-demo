@@ -14,7 +14,6 @@ Puppet::Functions.create_function(:'innodbcluster::seed_node') do
 
     members.each do |host|
       cmd = ["mysqlsh", "#{user}@#{host}", "--", "cluster", "status"]
-      Puppet.debug("Trying to contact #{host} using mysqlsh")
       Puppet.warning("Trying to contact #{host} using mysqlsh")
       stdout, stderr, status = Open3.capture3(env, *cmd)
 
@@ -23,7 +22,9 @@ Puppet::Functions.create_function(:'innodbcluster::seed_node') do
       end
     end
 
-    call_function('facts')['networking']['fqdn']
+    fqdn = call_function('getvar', 'facts.networking.fqdn')
+    Puppet.warning("Fallback to agent FQDN: #{fqdn}")
+    fqdn
   rescue => e
     Puppet.warning("innodbcluster::seed_node failed: #{e}")
     nil

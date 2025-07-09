@@ -21,7 +21,9 @@ Puppet::Functions.create_function(:'innodbcluster::seed_clusterset_node') do
       end
     end
 
-    call_function('facts')['networking']['fqdn']
+    fqdn = call_function('getvar', 'facts.networking.fqdn')
+    Puppet.warning("Fallback to agent FQDN: #{fqdn}")
+    fqdn
   rescue => e
     Puppet.warning("innodbcluster::seed_node failed: #{e}")
     nil
