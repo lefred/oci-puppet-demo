@@ -19,7 +19,7 @@ Puppet::Functions.create_function(:'innodbcluster::cluster_exists') do
 
       begin
         json = JSON.parse(stdout)
-        if json['clusterName'] == cluster_name
+        if cluster_name.start_with?(json['clusterName'])
           Puppet.debug("Cluster '#{cluster_name}' found on host #{host}")
           return true
         end
