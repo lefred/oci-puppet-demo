@@ -5,12 +5,12 @@ innodbcluster::mysql_root_password: fred
 innodbcluster::adminuser: clusteradmin
 innodbcluster::adminpassword: Passw0rd!
 
-innodbcluster::clusterset::name: myclusterset
-innodbcluster::clusterset::primary_name: mycluster
+innodbcluster::clusterset::name: oci-clusterset
+innodbcluster::clusterset::primary_name: cluster-ashburn
 innodbcluster::clusterset::members:
-  - mysql1
-  - mysql2
-  - mysql3
-  - mysql4
-  - mysql5
+  - mysql-1.mysqlpriv1.mysqlvcn1.oraclevcn.com
+  - mysql-2.mysqlpriv1.mysqlvcn1.oraclevcn.com
+  - mysql-3.mysqlpriv1.mysqlvcn1.oraclevcn.com
+  - mysql-1.mysqlpriv2.mysqlvcn2.oraclevcn.com
+  - mysql-2.mysqlpriv2.mysqlvcn2.oraclevcn.com
 

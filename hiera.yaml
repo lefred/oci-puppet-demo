@@ -7,7 +7,7 @@ defaults:
 
 hierarchy:
   - name: "Per-node data"
-    path: "nodes/%{facts.networking.hostname}.yaml"
+    path: "nodes/%{::trusted.certname}.yaml"
   
   - name: "Common data" 
     path: "common.yaml"
