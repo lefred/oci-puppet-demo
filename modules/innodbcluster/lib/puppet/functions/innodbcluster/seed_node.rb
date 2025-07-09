@@ -10,7 +10,6 @@ Puppet::Functions.create_function(:'innodbcluster::seed_node') do
 
   def find_seed(members, user = 'root')
     env = { 'MYSQL_TEST_LOGIN_FILE' => '/root/.mylogin.cnf' }
-    Puppet.debug("DEBUG: got those members #{members}")
 
     members.each do |host|
       cmd = ["mysqlsh", "#{user}@#{host}", "--", "cluster", "status"]
@@ -18,6 +17,7 @@ Puppet::Functions.create_function(:'innodbcluster::seed_node') do
       stdout, stderr, status = Open3.capture3(env, *cmd)
 
       if status.success?
+        Puppet.warning("Success we found a cluster on #{host}")
         return host
       end
     end
