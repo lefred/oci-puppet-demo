@@ -9,7 +9,7 @@ Puppet::Functions.create_function(:'innodbcluster::cluster_node') do
   end
 
   def find_node(member, user = 'root')
-    env = { 'MYSQL_TEST_LOGIN_FILE' => '/root/.mylogin.cnf' }
+    env = { 'MYSQL_TEST_LOGIN_FILE' => File.join(Dir.home, '.mylogin.cnf') }
     cmd = ["mysqlsh", "#{user}@#{member}", "--", "cluster", "status"]
 
     stdout, stderr, status = Open3.capture3(env, *cmd)

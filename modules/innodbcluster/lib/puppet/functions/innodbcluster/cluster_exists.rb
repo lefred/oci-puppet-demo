@@ -9,7 +9,7 @@ Puppet::Functions.create_function(:'innodbcluster::cluster_exists') do
   end
 
   def find_seed(members, cluster_name, user = 'root')
-    env = { 'MYSQL_TEST_LOGIN_FILE' => '/root/.mylogin.cnf' }
+    env = { 'MYSQL_TEST_LOGIN_FILE' => File.join(Dir.home, '.mylogin.cnf') }
 
     members.each do |host|
       cmd = ["mysqlsh", "#{user}@#{host}", "--", "cluster", "describe"]

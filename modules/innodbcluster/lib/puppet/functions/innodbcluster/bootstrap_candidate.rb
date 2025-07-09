@@ -7,7 +7,7 @@ Puppet::Functions.create_function(:'innodbcluster::bootstrap_candidate') do
   end
 
   def find_candidate(members, user = 'root')
-    env = { 'MYSQL_TEST_LOGIN_FILE' => '/root/.mylogin.cnf' }
+    env = { 'MYSQL_TEST_LOGIN_FILE' => File.join(Dir.home, '.mylogin.cnf') }
 
     members.each do |host|
       cmd = ["mysqlsh", "#{user}@#{host}", "--", "cluster", "describe"]
