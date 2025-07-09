@@ -12,6 +12,9 @@ class innodbcluster::magic {
   $cluster_node = innodbcluster::seed_node($members, $user)
   $this_host = $facts['networking']['fqdn']
 
+  $short_host = split($this_host, '.')[0]
+  $host_with_port = "${short_host}:3306"
+
   if defined(Class['innodbcluster::clusterset']) {
      $clusterset_primary_name = lookup('innodbcluster::clusterset::primary_name', Optional[String], 'first', undef)
      if $clusterset_primary_name == $clustername {
@@ -76,8 +79,6 @@ class innodbcluster::magic {
         unless innodbcluster::cluster_node($this_host, $user) {
           notice("This node will join the cluster using ${cluster_node} as seed node")
         }
-        $short_host = split($this_host, '.')[0]
-        $host_with_port = "${short_host}:3306"
         exec {
           "add_instance_cluster":
             command => "mysqlsh ${user}@${cluster_node} --no-wizard -- cluster add-instance ${user}@${this_host} --recoveryMethod=clone",
