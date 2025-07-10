@@ -3,4 +3,4 @@ classes:
     - innodbcluster
     - innodbcluster::passwords
 
-innodbcluster::passwords::user_dir: "/opt/puppetlabs/server/data/puppetserver"
+innodbcluster::passwords::user_dir: "/opt/puppetlabs/server/data/puppetserver/"
