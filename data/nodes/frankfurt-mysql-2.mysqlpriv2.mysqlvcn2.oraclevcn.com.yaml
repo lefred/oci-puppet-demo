@@ -6,5 +6,5 @@ classes:
 
 innodbcluster::cluster_name: cluster-frankfurt
 innodbcluster::members:
-  - mysql-1.mysqlpriv2.mysqlvcn2.oraclevcn.com
-  - mysql-2.mysqlpriv2.mysqlvcn2.oraclevcn.com
+  - frankfurt-mysql-1.mysqlpriv2.mysqlvcn2.oraclevcn.com
+  - frankfurt-mysql-2.mysqlpriv2.mysqlvcn2.oraclevcn.com
