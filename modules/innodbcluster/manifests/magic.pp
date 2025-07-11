@@ -1,4 +1,4 @@
-class innodbcluster::magic {
+class innodbcluster::magic (seed_node = undef) {
 
   require innodbcluster::packages
   require innodbcluster::serverpackages
@@ -9,7 +9,11 @@ class innodbcluster::magic {
   $clustername = $innodbcluster::cluster_name
 
   $members = lookup('innodbcluster::members', Optional[Array[String]], 'first', undef)
-  $cluster_node = innodbcluster::seed_node($members, $user)
+  if $seed_node == undef {
+    $cluster_node = innodbcluster::seed_node($members, $user)
+  } else {
+    $cluster_node = $seed_node
+  }
   $this_host = $facts['networking']['fqdn']
 
   $short_host = split($this_host, '.')[0]
