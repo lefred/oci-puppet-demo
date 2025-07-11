@@ -76,9 +76,11 @@ class innodbcluster::magic ($seed_node = undef) {
         $clusterset_members = lookup('innodbcluster::clusterset::members', Optional[Array[String]], 'first', undef)
         if innodbcluster::clusterset_exists($clusterset_members, $user) and
             !innodbcluster::clusterset_is_part($cluster_node, $clustername, $user) {
-          notify { 'This node will be the seed of a secondary cluster of a clusterset':
-            notify => Exec['create_replica_cluster'],
-          }
+             if defined(Class['innodbcluster::clusterset']) {
+               notify { 'This node will be the seed of a secondary cluster of a clusterset':
+                 notify => Exec['create_replica_cluster'],
+               }
+             }
         }
       }
     } else {
