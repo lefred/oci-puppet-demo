@@ -28,7 +28,7 @@ class innodbcluster::readreplica {
           path    => ['/usr/bin', '/bin'],
           environment => ['MYSQL_TEST_LOGIN_FILE=/root/.mylogin.cnf'],
           require => Exec["create_admin_user"],
-          nofify => Exec["change_instance_label"],
+          notify => Exec["change_instance_label"],
       }
     }
   }
