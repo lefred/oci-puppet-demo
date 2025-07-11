@@ -26,6 +26,14 @@ class innodbcluster::config {
         require   => Exec['set_root_pwd'],
  }
 
+ exec {'set_report_host':
+        command   => "mysql -e \"SET PERSIST_ONLY report_host = '${this_host}'; retsart \"",
+        environment => ['MYSQL_TEST_LOGIN_FILE=/root/.mylogin.cnf', 'HOME=/root'],
+        path      => '/usr/bin',
+        require   => Exec['set_root_pwd_file'],
+        refreshonly => true,
+ }
+
 
  $mysqlserverid = $innodbcluster::mysql_serverid
 
@@ -52,6 +60,7 @@ class innodbcluster::config {
           path    => ['/sbin', '/usr/bin', '/bin'],
           unless  => "test -f /var/lib/mysql/ibdata1",
           require => Package["mysql-community-server"],
+          notify => Exec["set_report_host"],
           command => "mysqld --initialize-insecure -u mysql --datadir /var/lib/mysql";
  }
 
