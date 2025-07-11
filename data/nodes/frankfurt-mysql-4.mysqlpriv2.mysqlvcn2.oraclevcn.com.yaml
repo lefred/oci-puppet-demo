@@ -1,0 +1,11 @@
+---
+classes:
+    - innodbcluster
+    - innodbcluster::readreplica
+    - innodbcluster::router
+
+innodbcluster::cluster_name: cluster-frankfurt
+innodbcluster::members:
+  - frankfurt-mysql-1.mysqlpriv2.mysqlvcn2.oraclevcn.com
+  - frankfurt-mysql-2.mysqlpriv2.mysqlvcn2.oraclevcn.com
+  - frankfurt-mysql-3.mysqlpriv2.mysqlvcn2.oraclevcn.com
