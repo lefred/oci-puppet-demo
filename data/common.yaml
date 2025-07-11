@@ -8,9 +8,9 @@ innodbcluster::adminpassword: Passw0rd!
 innodbcluster::clusterset::name: oci-clusterset
 innodbcluster::clusterset::primary_name: cluster-ashburn
 innodbcluster::clusterset::members:
-  - mysql-1.mysqlpriv1.mysqlvcn1.oraclevcn.com
-  - mysql-2.mysqlpriv1.mysqlvcn1.oraclevcn.com
-  - mysql-3.mysqlpriv1.mysqlvcn1.oraclevcn.com
-  - mysql-1.mysqlpriv2.mysqlvcn2.oraclevcn.com
-  - mysql-2.mysqlpriv2.mysqlvcn2.oraclevcn.com
+  - ashburn-mysql-1.mysqlpriv1.mysqlvcn1.oraclevcn.com
+  - ashburn-mysql-2.mysqlpriv1.mysqlvcn1.oraclevcn.com
+  - ashburn-mysql-3.mysqlpriv1.mysqlvcn1.oraclevcn.com
+  - frankfurt-mysql-1.mysqlpriv2.mysqlvcn2.oraclevcn.com
+  - frankfurt-mysql-2.mysqlpriv2.mysqlvcn2.oraclevcn.com
 
