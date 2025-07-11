@@ -14,7 +14,6 @@ class innodbcluster::passwords ( $user_dir = "/root/"){
       'set_admin_pwd_file_ownership':
         command   => "chown puppet:puppet ${user_dir}.mylogin.cnf >/dev/null 2>&1 && echo 0",
         path      => ['/usr/bin', '/usr/libexec/mysqlsh/'],
-        unless    => "echo \$USER | grep -vq '^root$'",
         require   => Exec['set_admin_pwd_file'],
         refreshonly => true;
  }
