@@ -1,4 +1,4 @@
-class innodbcluster::magic (seed_node = undef) {
+class innodbcluster::magic ($seed_node = undef) {
 
   require innodbcluster::packages
   require innodbcluster::serverpackages
