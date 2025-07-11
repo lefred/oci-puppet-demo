@@ -3,6 +3,7 @@ class innodbcluster::readreplica {
   require innodbcluster::packages
   require innodbcluster::serverpackages
   require innodbcluster::config
+  require innodbcluster::service
 
   $user = $innodbcluster::adminuser
   $password = $innodbcluster::adminpassword
