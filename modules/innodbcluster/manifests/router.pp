@@ -26,7 +26,7 @@ class innodbcluster::router (
    } else {
     exec {
       'bootstrap_mysql_router':
-        command => "expect -d -c 'set timeout -1; spawn mysqlrouter --bootstrap ${adminuser}@${cluster_node}  --user=mysqlrouter --conf-use-gr-notifications 1; expect \"Please enter MySQL password for ${adminuser}:\"; send \"${adminpassword}\r\"; expect eof' > /tmp/expect_debug.log 2>&1",
+        command => "expect -c 'set timeout -1; spawn mysqlrouter --bootstrap ${adminuser}@${cluster_node}  --user=mysqlrouter --conf-use-gr-notifications 1; expect \"Please enter MySQL password for ${adminuser}:\"; send \"${adminpassword}\r\"; expect eof'",
         path    => ['/usr/bin', '/bin'],
         creates  => "/etc/mysqlrouter/mysqlrouter.configured",
         require => [ Package['mysql-router'], Exec['set_admin_pwd_file'], Package['mysql-shell'] ],

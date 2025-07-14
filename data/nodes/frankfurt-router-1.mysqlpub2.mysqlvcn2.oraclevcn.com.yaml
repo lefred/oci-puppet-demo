@@ -1,0 +1,10 @@
+---
+classes:
+    - innodbcluster
+    - innodbcluster::router
+
+innodbcluster::cluster_name: cluster-ashburn
+innodbcluster::members:
+  - ashburn-mysql-1.mysqlpriv1.mysqlvcn1.oraclevcn.com
+  - ashburn-mysql-2.mysqlpriv1.mysqlvcn1.oraclevcn.com
+  - ashburn-mysql-3.mysqlpriv1.mysqlvcn1.oraclevcn.com
