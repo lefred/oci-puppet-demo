@@ -48,6 +48,13 @@ class innodbcluster::router (
         hasrestart => true,
         require => Exec['bootstrap_mysql_router'],
     }
+
+    exec { 'open_firewall_ports':
+        command => "firewall-cmd --zone=public --add-port=6446-64450/tcp --permanent && firewall-cmd --reload",
+        path    => ['/usr/bin', '/bin'],
+        unless  => "firewall-cmd --list-ports | grep -q '6446/tcp'",
+        require => Service['mysqlrouter'],
+    }
    }
 }
 
