@@ -2,7 +2,6 @@
 classes:
     - innodbcluster
     - innodbcluster::readreplica
-    - innodbcluster::router
 
 innodbcluster::cluster_name: cluster-frankfurt
 innodbcluster::members:

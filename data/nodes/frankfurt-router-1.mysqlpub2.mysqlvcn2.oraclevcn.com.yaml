@@ -3,8 +3,8 @@ classes:
     - innodbcluster
     - innodbcluster::router
 
-innodbcluster::cluster_name: cluster-ashburn
+innodbcluster::cluster_name: cluster-frankfurt
 innodbcluster::members:
-  - ashburn-mysql-1.mysqlpriv1.mysqlvcn1.oraclevcn.com
-  - ashburn-mysql-2.mysqlpriv1.mysqlvcn1.oraclevcn.com
-  - ashburn-mysql-3.mysqlpriv1.mysqlvcn1.oraclevcn.com
+  - frankfurt-mysql-1.mysqlpriv2.mysqlvcn2.oraclevcn.com
+  - frankfurt-mysql-2.mysqlpriv2.mysqlvcn2.oraclevcn.com
+  - frankfurt-mysql-3.mysqlpriv2.mysqlvcn2.oraclevcn.com
